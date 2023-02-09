@@ -1,21 +1,31 @@
-from twilio.rest import Client
+import requests
+import smtplib
 
-TWILIO_SID = YOUR TWILIO ACCOUNT SID
-TWILIO_AUTH_TOKEN = YOUR TWILIO AUTH TOKEN
-TWILIO_VIRTUAL_NUMBER = YOUR TWILIO VIRTUAL NUMBER
-TWILIO_VERIFIED_NUMBER = YOUR TWILIO VERIFIED NUMBER
+MY_EMAIL = "100daysg@gmail.com"
+MY_PASSWORD = "gfjzvlmufwfzjkla"
 
 
 class NotificationManager:
-
+    # This class is responsible for sending notifications with the deal flight details.
     def __init__(self):
-        self.client = Client(TWILIO_SID, TWILIO_AUTH_TOKEN)
+        pass
 
-    def send_sms(self, message):
-        message = self.client.messages.create(
-            body=message,
-            from_=TWILIO_VIRTUAL_NUMBER,
-            to=TWILIO_VERIFIED_NUMBER,
-        )
-        # Prints if successfully sent.
-        print(message.sid)
+    def telegram_bot_sendtext(self, bot_message):
+        bot_token = "6093731261:AAH_sXfvkElXekEfEfttw-w7h3rp93Rw1t4"
+        bot_chatID = "5738351415"
+        send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=HTML&text=' + bot_message
+
+        response = requests.get(send_text)
+
+        return response.json()
+
+    def send_emails(self, customer_data, email_message):
+        with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+            connection.starttls()
+            connection.login(user=MY_EMAIL, password=MY_PASSWORD)
+            for each_customer in customer_data:
+
+                connection.sendmail(from_addr=MY_EMAIL,
+                                    to_addrs=each_customer["email"],
+                                    msg=email_message)
+
