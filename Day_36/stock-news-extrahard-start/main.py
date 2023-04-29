@@ -61,6 +61,7 @@ divide = yesterday_price / the_day_before_price
 # print(' '.join(news3["description"].split(" ")[5:]))
 if divide >= 1.04:
     to_send = f"{STOCK}: 🔺{round((divide-1) * 100)}%\nHeadline: {news1['title']}\nBrief: {news1['description']}"
+    telegram_bot_sendtext(to_send)
     to_send = f"{STOCK}: 🔺{round((divide-1) * 100)}%\nHeadline: {news2['title']}\nBrief: {news2['description']}"
     telegram_bot_sendtext(to_send)
     to_send = f"{STOCK}: 🔺{round((divide-1) * 100)}%\nHeadline: {news3['title']}\nBrief: {news3['description']}"

@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e29a3f8a-9aa5-4dae-9d8e-0b0501b0976e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../Day_15/.idea/Day_15.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Day_16/oop-coffee-machine-start/.idea/oop-coffee-machine-start.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Day_21/snake_game_full/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Day_22/Pong/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../Day_24/Mail Merge Project Start/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day_23/turtle-crossing-solution/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day_23/turtle-crossing-solution/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day_25/us-states-game-start/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day_25/us-states-game-start/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../day-26/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../day-26/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +27,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/ComputerScience/Python/100_days_of_code/Day_26/day-26"
+    "last_opened_file_path": "E:/ComputerScience/Python/100_days_of_code/Day_27/kilo_converter"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
