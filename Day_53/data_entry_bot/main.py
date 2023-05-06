@@ -27,41 +27,41 @@ soup = BeautifulSoup(webpage, "html.parser")
 
 print(soup.prettify())
 
-# data = json.loads(
-#     soup.select_one("script[data-zrr-shared-data-key]")
-#     .contents[0]
-#     .strip("!<>-")
-# )
-# all_data = data['cat1']['searchResults']['listResults']
-#
-# print(all_data)
+data = json.loads(
+    soup.select_one("script[data-zrr-shared-data-key]")
+    .contents[0]
+    .strip("!<>-")
+)
+all_data = data['cat1']['searchResults']['listResults']
 
-# price_list = []
-# address_list = []
-# url_list = []
-#
-# for i in range(len(all_data)):
-#     try:
-#         price = all_data[i]["units"][0]["price"]
-#     except KeyError:
-#         price = all_data[i]["price"]
-#     address = all_data[i]["address"]
-#     house_url = all_data[i]["detailUrl"]
-#
-#     if "http" not in house_url:
-#         house_url = f"https://www.zillow.com{house_url}"
-#
-#     price_list.append(price)
-#     address_list.append(address)
-#     url_list.append(house_url)
-#
-# print(price_list)
-# print(address_list)
-# print(url_list)
+print(all_data)
 
-price_list = ["111", "222"]
-address_list = ["111", "222"]
-url_list = ["111", "222"]
+price_list = []
+address_list = []
+url_list = []
+
+for i in range(len(all_data)):
+    try:
+        price = all_data[i]["units"][0]["price"]
+    except KeyError:
+        price = all_data[i]["price"]
+    address = all_data[i]["address"]
+    house_url = all_data[i]["detailUrl"]
+
+    if "http" not in house_url:
+        house_url = f"https://www.zillow.com{house_url}"
+
+    price_list.append(price)
+    address_list.append(address)
+    url_list.append(house_url)
+
+print(price_list)
+print(address_list)
+print(url_list)
+
+# price_list = ["111", "222"]
+# address_list = ["111", "222"]
+# url_list = ["111", "222"]
 
 # selenium driver
 chrome_driver_path = "C:\\Development\\chromedriver.exe"
@@ -72,7 +72,7 @@ driver = webdriver.Chrome(executable_path=chrome_driver_path, options=chrome_opt
 driver.maximize_window()
 
 # google sheet url
-sheet_url = "https://docs.google.com/forms/d/1m_NgiCqUDu328lEIUQg8SQj4tUSk8s3VJooNSvUsHTc/viewform?edit_requested=true"
+sheet_url = "https://docs.google.com/forms/d/e/1FAIpQLSepdxijMngjq8hucybI4jrKlYr-6kLjYxq5ROWYomA3QiQkpA/viewform?usp=sf_link"
 driver.get(sheet_url)
 
 time.sleep(3)
@@ -110,27 +110,40 @@ for i in range(len(price_list)):
     # write next
     write_next.click()
 
-log_in = driver.find_element(By.XPATH, '//*[@id="SMMuxb"]/a[1]')
-log_in.click()
+driver.get("https://docs.google.com/forms/d/1b_ouSj55hVuROhkp-iE2svbHQ6iWsJz5rMX7coOs-DM/edit#responses")
 
 time.sleep(3)
 
-driver.switch_to.window(driver.window_handles[1])
+link_to_sheet = driver.find_element(By.XPATH, '//*[@id="ResponsesView"]/div/div[1]/div[1]/div[2]/div[1]/div[1]/div')
+link_to_sheet.click()
 
-gmail_textbox = driver.find_element(By.CSS_SELECTOR, ".whsOnd.zHQkBf")
-gmail_textbox.send_keys("100daysg@gmail.com")
+sheet_name = driver.find_element(By.XPATH, '//*[@id="yDmH0d"]/div[13]/div/div[2]/span/div/div/span/div[1]/div/div/div[1]/div/div[1]/input')
+sheet_name.send_keys("Zillow")
 
-continue_button = driver.find_element(By.XPATH, '//*[@id="identifierNext"]/div/button')
-continue_button.click()
-
-create_sheet_button = driver.find_element(By.XPATH, '//*[@id="ResponsesView"]/div/div[1]/div[1]/div[2]/div[1]/div[1]/div')
-create_sheet_button.click()
-
-sheet_name_textbox = driver.find_element(By.XPATH, '//*[@id="yDmH0d"]/div[56]/div/div[2]/span/div/div/span/div[1]/div/div/div[1]/div/div[1]/input')
-sheet_name_textbox.send_keys("Zillow Sheet")
-
-create_button = driver.find_element(By.XPATH, '//*[@id="yDmH0d"]/div[56]/div/div[2]/div[3]/div[2]')
+create_button = driver.find_element(By.XPATH, '//*[@id="yDmH0d"]/div[13]/div/div[2]/div[3]/div[2]')
 create_button.click()
 
-driver.close()
+# log_in = driver.find_element(By.XPATH, '//*[@id="SMMuxb"]/a[1]')
+# log_in.click()
+#
+# time.sleep(3)
+#
+# driver.switch_to.window(driver.window_handles[1])
+#
+# gmail_textbox = driver.find_element(By.CSS_SELECTOR, ".whsOnd.zHQkBf")
+# gmail_textbox.send_keys("100daysg@gmail.com")
+#
+# continue_button = driver.find_element(By.XPATH, '//*[@id="identifierNext"]/div/button')
+# continue_button.click()
+#
+# create_sheet_button = driver.find_element(By.XPATH, '//*[@id="ResponsesView"]/div/div[1]/div[1]/div[2]/div[1]/div[1]/div')
+# create_sheet_button.click()
+#
+# sheet_name_textbox = driver.find_element(By.XPATH, '//*[@id="yDmH0d"]/div[56]/div/div[2]/span/div/div/span/div[1]/div/div/div[1]/div/div[1]/input')
+# sheet_name_textbox.send_keys("Zillow Sheet")
+#
+# create_button = driver.find_element(By.XPATH, '//*[@id="yDmH0d"]/div[56]/div/div[2]/div[3]/div[2]')
+# create_button.click()
+
+# driver.close()
 
