@@ -67,7 +67,8 @@ url_list = ["111", "222"]
 chrome_driver_path = "C:\\Development\\chromedriver.exe"
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
-driver = webdriver.Chrome(executable_path=chrome_driver_path, chrome_options=chrome_options)
+driver = webdriver.Chrome()
+driver = webdriver.Chrome(executable_path=chrome_driver_path, options=chrome_options)
 driver.maximize_window()
 
 # google sheet url
@@ -75,6 +76,8 @@ sheet_url = "https://docs.google.com/forms/d/1m_NgiCqUDu328lEIUQg8SQj4tUSk8s3VJo
 driver.get(sheet_url)
 
 time.sleep(3)
+
+first_tab_handle = driver.current_window_handle
 
 for i in range(len(price_list)):
     time.sleep(3)
@@ -112,7 +115,9 @@ log_in.click()
 
 time.sleep(3)
 
-gmail_textbox = driver.find_element(By.XPATH, '//*[@id="identifierId"]')
+driver.switch_to.window(driver.window_handles[1])
+
+gmail_textbox = driver.find_element(By.CSS_SELECTOR, ".whsOnd.zHQkBf")
 gmail_textbox.send_keys("100daysg@gmail.com")
 
 continue_button = driver.find_element(By.XPATH, '//*[@id="identifierNext"]/div/button')
