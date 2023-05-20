@@ -12,7 +12,7 @@ from functools import wraps
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY", "8BYkEfBA6O6donzWlSihBXox7C0sKR6b")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
@@ -175,6 +175,8 @@ def show_post(post_id):
     form = CommentForm()
     requested_post = BlogPost.query.filter_by(id=post_id).first()
     print(requested_post)
+    print(requested_post.body)
+    print(requested_post.title)
     if form.validate_on_submit():
         print("hi")
         try:
@@ -234,7 +236,7 @@ def add_new_post():
     return render_template("make-post.html", form=form)
 
 
-@app.route("/edit-post/<int:post_id>")
+@app.route("/edit-post/<int:post_id>", methods=["GET", "POST"])
 @admin_only
 def edit_post(post_id):
     post = BlogPost.query.get(post_id)
