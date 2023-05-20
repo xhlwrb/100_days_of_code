@@ -171,28 +171,21 @@ def logout():
 
 @app.route("/post/<int:post_id>", methods=["GET", "POST"])
 def show_post(post_id):
-    print("inside show post")
     form = CommentForm()
     requested_post = BlogPost.query.filter_by(id=post_id).first()
-    print(requested_post)
-    print(requested_post.body)
-    print(requested_post.title)
     if form.validate_on_submit():
-        print("hi")
         try:
             new_comment = Comment(text=form.comment.data,
                                   author_id=current_user.id,
                                   post_id=post_id)
         except AttributeError:
-            print("hahaha")
             flash('Sorry, only logged-in user can make a comment.')
             return redirect(url_for('login'))
         else:
             with app.app_context():
                 db.session.add(new_comment)
                 db.session.commit()
-            return render_template("post.html", post=requested_post, form=form)
-    print("h")
+            return redirect(url_for('show_post', post_id=post_id))
     return render_template("post.html", post=requested_post, form=form)
 
 
