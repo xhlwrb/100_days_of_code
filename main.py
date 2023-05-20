@@ -170,6 +170,7 @@ def logout():
 
 @app.route("/post/<int:post_id>", methods=["GET", "POST"])
 def show_post(post_id):
+    print("inside show post")
     form = CommentForm()
     requested_post = BlogPost.query.filter_by(id=post_id).first()
     print("hii")
