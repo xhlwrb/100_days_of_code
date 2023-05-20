@@ -174,7 +174,7 @@ def show_post(post_id):
     print("inside show post")
     form = CommentForm()
     requested_post = BlogPost.query.filter_by(id=post_id).first()
-    print(requested_post.body)
+    print(requested_post)
     if form.validate_on_submit():
         print("hi")
         try:
@@ -249,7 +249,7 @@ def edit_post(post_id):
         post.title = edit_form.title.data
         post.subtitle = edit_form.subtitle.data
         post.img_url = edit_form.img_url.data
-        post.author = edit_form.author.data
+        post.author_id = current_user.id
         post.body = edit_form.body.data
         db.session.commit()
         return redirect(url_for("show_post", post_id=post.id))
