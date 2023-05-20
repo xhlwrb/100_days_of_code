@@ -174,7 +174,7 @@ def show_post(post_id):
     print("inside show post")
     form = CommentForm()
     requested_post = BlogPost.query.filter_by(id=post_id).first()
-    print("hii")
+    print(requested_post.body)
     if form.validate_on_submit():
         print("hi")
         try:
